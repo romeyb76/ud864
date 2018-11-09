@@ -16,25 +16,62 @@ API Course, Lesson 1 -->
      // Function to initialize the map within the map div
      function initMap() {
        map = new google.maps.Map(document.getElementById('map'), {
-         center: {lat: 40.74135, lng: -73.99802},
+         center: {lat: 31.444090, lng: -97.206880},
          zoom: 14
        });
        // Create a single latLng literal object.
-       var singleLatLng = {lat: 40.74135, lng: -73.99802};
+       var singleLatLng = {lat: 31.444090, lng: -97.206880};
        // TODO: Create a single marker appearing on initialize -
        // Create it with the position of the singleLatLng,
        // on the map, and give it your own title!
+       var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'My Residence'
+        });
 
-       // TODO: create a single infowindow, with your own content.
+       // TODO: create a single infowindow, with your own content.var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
        // It must appear on the marker
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Hewitt, TX</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Hewitt</b>,a suburb of Waco.</p>'+
+            '<p>Attribution: Hewitt, <a href="https://en.wikipedia.org/wiki/Hewitt,_Texas">'+
+            'https://en.wikipedia.org/wiki/Hewitt,_Texas</a> '+
+            '(last visited Now).</p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hewitt, TX'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
 
        // TODO: create an EVENT LISTENER so that the infowindow opens when
        // the marker is clicked!
+       marker.addListener('click', function() {
+          map.setZoom(8);
+          map.setCenter(marker.getPosition());
+        });
      }
    </script>
    <!--TODO: Insert your API Key in the below call to load the API.-->
    <script async defer
-     src="https://maps.googleapis.com/maps/api/js?v=3&key=XXX&callback=initMap">
+     src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBzIIxexz8vA1DDmjY9vLLIeIJOX2uBCP4&callback=initMap">
    </script>
  </body>
 </html>
